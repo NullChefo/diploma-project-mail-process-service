@@ -10,19 +10,33 @@ env:
   DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
   DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-services:
-  postgres:
-    image: postgres:latest
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: rootpassword
-      POSTGRES_DB: diploma-project-test
-
 jobs:
-  build-and-publish:
+  # Label of the container job
+  container-job:
+    # Docker Hub image that `container-job` executes in
+    container: node:10.18-jessie
+    # Containers must run in Linux based operating systems
     runs-on: ubuntu-latest
+    # Service containers to run with `container-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: rootpassword
+          POSTGRES_DB: diploma-project-test
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
 
     steps:
       - name: Checkout code
@@ -31,17 +45,29 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: 19
+          java-version: '19'
+          distribution: 'zulu'
+          cache: maven
 
       - name: Build with Maven
-        run: mvn spring-boot:build-image
+        run: ./mvnw spring-boot:build-image
+        env:
+          # The hostname used to communicate with the PostgreSQL service container
+          SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/diploma-project-test"
+          SPRING_DATASOURCE_USERNAME: "postgres"
+          SPRING_DATASOURCE_PASSWORD: "rootpassword"
+      #          SPRING_RABBITMQ_ADDRESSES: "rabbitmq"
+      #          SPRING_RABBITMQ_PORT: "15672"
+      #          SPRING_RABBITMQ_USERNAME: "user"
+      #          SPRING_RABBITMQ_PASSWORD: "password"
 
-      - name: Build and publish Docker image
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: ${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      #      - name: Build and publish Docker image
+      #        uses: docker/build-push-action@v2
+      #        with:
+      #          context: .
+      #          push: true
+      #          tags: ${{ env.IMAGE_NAME }}:${{ github.sha }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -50,5 +76,8 @@ jobs:
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_PASSWORD }}
 
+
+      - name: Tag ima
+        run: docker tag ${{ env.IMAGE_NAME }}:latest ghcr.io/nullchefo/diploma-project-${{ env.IMAGE_NAME }}:${{ github.sha }}
       - name: Push Docker image to GitHub Container Registry
         run: docker push ghcr.io/nullchefo/diploma-project-${{ env.IMAGE_NAME }}:${{ github.sha }}
