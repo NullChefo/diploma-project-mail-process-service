@@ -1,0 +1,37 @@
+
+
+name: Native-AMD64
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'liberica' # See 'Supported distributions' for available options
+          java-version: '17'
+      - name: Checkout master
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+      #Build Image
+      - name: Build Image
+        run: ./mvnw -Pnative -Dmaven.test.skip=true spring-boot:build-image
+      #Login to DockerHub
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      #Deploy the image to the Docker registry
+      - name: Push Images to Docker Registry
+        run: docker push -a ghcr.io/nullchefo/diploma-project-mail-process-service

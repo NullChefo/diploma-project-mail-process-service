@@ -128,55 +128,22 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.hibernate.orm.tooling</groupId>
-				<artifactId>hibernate-enhance-maven-plugin</artifactId>
-				<version>${hibernate.version}</version>
-				<executions>
-					<execution>
-						<id>enhance</id>
-						<goals>
-							<goal>enhance</goal>
-						</goals>
-						<configuration>
-							<enableLazyInitialization>true</enableLazyInitialization>
-							<enableDirtyTracking>true</enableDirtyTracking>
-							<enableAssociationManagement>true</enableAssociationManagement>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+
+
 			<plugin>
 				<groupId>org.graalvm.buildtools</groupId>
 				<artifactId>native-maven-plugin</artifactId>
-				<configuration>
-					<classesDirectory>${project.build.outputDirectory}</classesDirectory>
-					<metadataRepository>
-						<enabled>true</enabled>
-					</metadataRepository>
-					<requiredVersion>22.3</requiredVersion>
-				</configuration>
-				<executions>
-					<execution>
-						<id>add-reachability-metadata</id>
-						<goals>
-							<goal>add-reachability-metadata</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
-
-
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+
+					<imageName>ghcr.io/nullchefo/diploma-project-${project.artifactId}:${project.version}</imageName>
 					<image>
-						<builder>paketobuildpacks/builder:tiny</builder>
+						<builder>dashaun/builder:tiny</builder>
 						<env>
 							<BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-							<BP_JVM_VERSION>19.*</BP_JVM_VERSION>
 						</env>
 					</image>
 					<excludes>
@@ -185,17 +152,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-					<!-- very important -->
-					<mainClass>${start-class}</mainClass>
 				</configuration>
-				<executions>
-					<execution>
-						<id>process-aot</id>
-						<goals>
-							<goal>process-aot</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 
