@@ -8,28 +8,36 @@ server:
 spring:
   application:
     name: mail-process-service
+  devtools:
+    livereload:
+      port: 35730
   datasource:
-    url:
-    username:
-    password:
+    url: jdbc:postgresql://127.0.0.1:5432/diploma-project-test
+    username: postgres
+    password: rootpassword
   rabbitmq:
-    addresses:
-    port:
-    username:
-    password:
+    addresses: 127.0.0.1
+    port: 15672
+    username: user
+    password: password
     # host: 127.0.0.1
   jpa:
     hibernate:
-      # TODO make validate
       ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-    # TODO make true
+
   flyway:
     enabled: false
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9000
 
 management:
   zipkin:
@@ -42,14 +50,6 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-
-flyway:
-  enabled: false
-
-logging:
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
-
 
 rabbitmq:
   queue:
