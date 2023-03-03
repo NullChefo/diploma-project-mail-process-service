@@ -24,7 +24,7 @@ jobs:
           submodules: true
       #Build Image
       - name: Build Image
-        run: ./mvnw -Pnative -Dmaven.test.skip=true spring-boot:build-image
+        run: ./mvnw -Pnative -Dspring.profiles.active=kubernetes -Dmaven.test.skip=true spring-boot:build-image
       #Login to DockerHub
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
