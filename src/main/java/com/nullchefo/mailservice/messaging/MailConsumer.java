@@ -3,26 +3,25 @@ package com.nullchefo.mailservice.messaging;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nullchefo.mailservice.entity.Mail;
 import com.nullchefo.mailservice.service.MailService;
 
-import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
-@AllArgsConstructor
+@Slf4j
 public class MailConsumer {
 
-	@Autowired
 	private final MailService mailService;
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(MailConsumer.class);
+	public MailConsumer(final MailService mailService) {
+		this.mailService = mailService;
+	}
 
 	@RabbitListener(queues = {"${rabbitmq.queue.name}"})
 	public void consumeJsonMessage(Mail mail){
-		LOGGER.info(String.format("Received JSON message -> %s", mail.toString()));
+		log.info(String.format("Received JSON message -> %s", mail.toString()));
 
 		mailService.processAndSend(mail);
 	}

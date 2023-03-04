@@ -1,29 +1,24 @@
 package com.nullchefo.mailservice.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.nullchefo.mailservice.entity.Mail;
 import com.nullchefo.mailservice.entity.MailList;
-import com.nullchefo.mailservice.messaging.MailConsumer;
 import com.nullchefo.mailservice.messaging.MailProducer;
 import com.nullchefo.mailservice.repository.MailListRepository;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
+@Slf4j
 public class MailService {
+	private final MailListRepository mailListRepository;
+	private final MailProducer mailProducer;
 
-	@Autowired
-	private MailListRepository mailListRepository;
-	@Autowired
-	private MailProducer mailProducer;
-	private static final Logger LOGGER = LoggerFactory.getLogger(MailConsumer.class);
+	public MailService(final MailListRepository mailListRepository, final MailProducer mailProducer) {
+		this.mailListRepository = mailListRepository;
+		this.mailProducer = mailProducer;
+	}
 
 	public void processAndSend(final Mail mail) {
 		MailList mailList = mailListRepository.findByUserId(mail.getUserId());
@@ -46,41 +41,36 @@ public class MailService {
 		final MailList newMailList = mailList;
 
 		// TODO use async
-			// code to run in thread
-			mailListRepository.save(newMailList);
-
+		// code to run in thread
+		mailListRepository.save(newMailList);
 
 		// TODO use async
-			// code to run in thread
-			mailProducer.sendMail(mail);
-
-
+		// code to run in thread
+		mailProducer.sendMail(mail);
 
 	}
 
 	private boolean isUserSignedForEmail(final Mail mail, final MailList mailList) {
 
 		//  TODO get that out
-		if (mail.getMailType().equalsIgnoreCase("announcements")  && mailList.isSignedForAnnouncements() ){
+		if (mail.getMailType().equalsIgnoreCase("announcements") && mailList.isSignedForAnnouncements()) {
 
-			LOGGER.info(String.format("user: %s not sign up for announcements" , mailList.getUserId()));
+			log.info(String.format("user: %s not sign up for announcements", mailList.getUserId()));
 			return true;
 		}
 		//  TODO get that out
-		if (mail.getMailType().equalsIgnoreCase("promotions")  && mailList.isSignedForPromotions() ){
+		if (mail.getMailType().equalsIgnoreCase("promotions") && mailList.isSignedForPromotions()) {
 
-			LOGGER.info(String.format("user: %s not sign up for promotions" , mailList.getUserId()));
+			log.info(String.format("user: %s not sign up for promotions", mailList.getUserId()));
 			return true;
 		}
 		//  TODO get that out
-		if (mail.getMailType().equalsIgnoreCase("notifications")  && mailList.isSignedForNotifications() ){
+		if (mail.getMailType().equalsIgnoreCase("notifications") && mailList.isSignedForNotifications()) {
 
-			LOGGER.info(String.format("user: %s not sign up for notifications" , mailList.getUserId()));
+			log.info(String.format("user: %s not sign up for notifications", mailList.getUserId()));
 			return true;
 		}
 		return false;
 	}
-
-
 
 }

@@ -1,6 +1,5 @@
 package com.nullchefo.mailservice.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nullchefo.mailservice.DTO.UserDTO;
 import com.nullchefo.mailservice.service.MailListService;
 
-import lombok.AllArgsConstructor;
-
 @RestController
 @RequestMapping("/mail-list")
-@AllArgsConstructor
 public class MailListRestController {
-
-
 
 	/*
 
@@ -30,15 +24,16 @@ public class MailListRestController {
 	DELETE removes data.
 	 */
 
-	@Autowired
-	private MailListService mailListService;
+	private final MailListService mailListService;
 
-
-	@GetMapping("/{userId}")
-	public void getMailListInfoForUser(@PathVariable final String userId){
-		return ;
+	public MailListRestController(final MailListService mailListService) {
+		this.mailListService = mailListService;
 	}
 
+	@GetMapping("/{userId}")
+	public void getMailListInfoForUser(@PathVariable final String userId) {
+		return;
+	}
 
 	@PostMapping
 	public ResponseEntity<?> registerUserIntoMailList(@RequestBody final UserDTO userDTO) throws Exception {
@@ -48,33 +43,26 @@ public class MailListRestController {
 	}
 
 	@DeleteMapping("/{userId}")
-	public ResponseEntity<?> removeUserFromMailList(@PathVariable final Long userId){
+	public ResponseEntity<?> removeUserFromMailList(@PathVariable final Long userId) {
 		return mailListService.removeUser(userId);
 	}
 
-
 	@GetMapping("/announcement/{userId}")
-	public ResponseEntity<?> toggleAnnouncements(@PathVariable final Long userId){
-
+	public ResponseEntity<?> toggleAnnouncements(@PathVariable final Long userId) {
 
 		return mailListService.toggleAnnouncements(userId);
 
 	}
 
 	@GetMapping("/promotion/{userId}")
-	public ResponseEntity<?> togglePromotions(@PathVariable final Long userId){
+	public ResponseEntity<?> togglePromotions(@PathVariable final Long userId) {
 
 		return mailListService.togglePromotions(userId);
 	}
 
 	@GetMapping("/notification/{userId}")
-	public ResponseEntity<?> toggleNotifications(@PathVariable final Long userId){
+	public ResponseEntity<?> toggleNotifications(@PathVariable final Long userId) {
 		return mailListService.toggleNotifications(userId);
 	}
-
-
-
-
-
 
 }

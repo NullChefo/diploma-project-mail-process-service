@@ -1,6 +1,5 @@
 package com.nullchefo.mailservice.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -8,19 +7,17 @@ import com.nullchefo.mailservice.DTO.UserDTO;
 import com.nullchefo.mailservice.entity.MailList;
 import com.nullchefo.mailservice.repository.MailListRepository;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
 @Slf4j
 public class MailListService {
 
-	@Autowired
-	private MailListRepository mailListRepository;
+	private final MailListRepository mailListRepository;
 
+	public MailListService(final MailListRepository mailListRepository) {
+		this.mailListRepository = mailListRepository;
+	}
 
 	public ResponseEntity<?> registerUser(final UserDTO userDTO) throws Exception {
 
