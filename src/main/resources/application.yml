@@ -50,7 +50,7 @@ management:
       show-details: ALWAYS
   metrics:
     tags:
-      application: ${spring.application.name:mail_process}
+      application: ${spring.application.name}
     distribution:
       percentiles-histogram:
         all: true
