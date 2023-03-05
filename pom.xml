@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -162,7 +162,8 @@
 				<version>3.3.1</version>
 				<configuration>
 					<from>
-						<image>azul/zulu-openjdk-alpine:19-jre-headless-latest</image> <!-- azul/zulu-openjdk-alpine:18.0.1-18.30.11-jre-headless-arm64 -->
+						<image>azul/zulu-openjdk-alpine:19-jre-headless-latest
+						</image> <!-- azul/zulu-openjdk-alpine:18.0.1-18.30.11-jre-headless-arm64 -->
 						<!-- TODO change
 						<platforms>
 							<platform>
@@ -181,7 +182,6 @@
 					</container>
 				</configuration>
 			</plugin>
-
 
 
 		</plugins>

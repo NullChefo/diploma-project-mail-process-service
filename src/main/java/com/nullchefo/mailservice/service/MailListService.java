@@ -21,7 +21,6 @@ public class MailListService {
 
 	public ResponseEntity<?> registerUser(final UserDTO userDTO) throws Exception {
 
-
 		MailList mailList = mailListRepository.findByUserId(userDTO.getUserId());
 		Long existingRecordId;
 
@@ -42,12 +41,9 @@ public class MailListService {
 
 			 */
 
-
-
 		try {
 			mailListRepository.save(mailList);
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 
 			// TODO log the exception with proper explain and remove the "e" from the body
 
@@ -59,9 +55,9 @@ public class MailListService {
 
 	public ResponseEntity<?> removeUser(final Long userId) {
 
-		if (mailListRepository.deleteByUserId(userId)){
+		if (mailListRepository.deleteByUserId(userId)) {
 			return ResponseEntity.ok().build();
-		}else {
+		} else {
 			return ResponseEntity.status(410).body("Not Found");
 		}
 
@@ -71,11 +67,10 @@ public class MailListService {
 
 		MailList mailList = mailListRepository.findByUserId(userId);
 
-		if(mailList != null){
+		if (mailList != null) {
 			mailList.setSignedForAnnouncements(!mailList.isSignedForAnnouncements());
 			mailListRepository.save(mailList);
-		}
-		else {
+		} else {
 			return ResponseEntity.status(410).body("Not Found");
 		}
 		return ResponseEntity.ok().build();
@@ -85,11 +80,10 @@ public class MailListService {
 	public ResponseEntity<?> togglePromotions(final Long userId) {
 
 		MailList mailList = mailListRepository.findByUserId(userId);
-		if(mailList != null){
+		if (mailList != null) {
 			mailList.setSignedForPromotions(!mailList.isSignedForPromotions());
 			mailListRepository.save(mailList);
-		}
-		else {
+		} else {
 			return ResponseEntity.status(410).body("Not Found");
 		}
 		return ResponseEntity.ok().build();
@@ -99,11 +93,10 @@ public class MailListService {
 	public ResponseEntity<?> toggleNotifications(final Long userId) {
 
 		MailList mailList = mailListRepository.findByUserId(userId);
-		if(mailList != null){
+		if (mailList != null) {
 			mailList.setSignedForNotifications(!mailList.isSignedForNotifications());
 			mailListRepository.save(mailList);
-		}
-		else {
+		} else {
 			return ResponseEntity.status(410).body("Not Found");
 		}
 		return ResponseEntity.ok().build();

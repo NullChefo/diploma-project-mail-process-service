@@ -25,21 +25,20 @@ public class RabbitMQConfig {
 	@Value("${rabbitmq.routing.key}")
 	private String routingKey;
 
-
 	@Bean
-	public Queue jsonQueue(){
+	public Queue jsonQueue() {
 		return new Queue(queue);
 	}
 
 	// spring bean for rabbitmq exchange
 	@Bean
-	public TopicExchange exchange(){
+	public TopicExchange exchange() {
 		return new TopicExchange(exchange);
 	}
 
 	// binding between json queue and exchange using routing key
 	@Bean
-	public Binding jsonBinding(){
+	public Binding jsonBinding() {
 		return BindingBuilder
 				.bind(jsonQueue())
 				.to(exchange())
@@ -47,12 +46,12 @@ public class RabbitMQConfig {
 	}
 
 	@Bean
-	public MessageConverter converter(){
+	public MessageConverter converter() {
 		return new Jackson2JsonMessageConverter();
 	}
 
 	@Bean
-	public AmqpTemplate amqpTemplate(ConnectionFactory connectionFactory){
+	public AmqpTemplate amqpTemplate(ConnectionFactory connectionFactory) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 		rabbitTemplate.setMessageConverter(converter());
 		return rabbitTemplate;

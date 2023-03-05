@@ -17,14 +17,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MailProducer {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(MailProducer.class);
 	@Value("${mail.send.exchange}")
 	private String exchange;
-
 	@Value("${mail.routing.key}")
 	private String routingKey;
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(MailProducer.class);
-
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 

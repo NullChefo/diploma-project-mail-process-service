@@ -1,7 +1,5 @@
 package com.nullchefo.mailservice.messaging;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +13,13 @@ import lombok.extern.slf4j.Slf4j;
 public class MailConsumer {
 
 	private final MailService mailService;
+
 	public MailConsumer(final MailService mailService) {
 		this.mailService = mailService;
 	}
 
-	@RabbitListener(queues = {"${rabbitmq.queue.name}"})
-	public void consumeJsonMessage(Mail mail){
+	@RabbitListener(queues = { "${rabbitmq.queue.name}" })
+	public void consumeJsonMessage(Mail mail) {
 		log.info(String.format("Received JSON message -> %s", mail.toString()));
 
 		mailService.processAndSend(mail);

@@ -5,7 +5,7 @@ import java.util.Map;
 import lombok.Data;
 
 @Data
-public class Mail{
+public class Mail {
 
 	private String recipient;
 	private Long userId;

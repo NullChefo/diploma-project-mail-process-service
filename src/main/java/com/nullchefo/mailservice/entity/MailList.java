@@ -25,7 +25,6 @@ public class MailList {
 	@Column(name = "id", nullable = false, unique = true)
 	private Long id;
 
-
 	@Column(name = "user_id", nullable = false, unique = true)
 	private Long userId;// TODO join
 
@@ -36,13 +35,11 @@ public class MailList {
 	// Add to metrics
 	private Integer sentMailsForUser = 0;
 
-
-	public MailList(UserDTO userDTO){
+	public MailList(UserDTO userDTO) {
 		this.userId = userDTO.getUserId();
 		this.signedForNotifications = userDTO.isSignedForNotifications();
 		this.signedForAnnouncements = userDTO.isSignedForAnnouncements();
 		this.signedForPromotions = userDTO.isSignedForPromotions();
 	}
-
 
 }

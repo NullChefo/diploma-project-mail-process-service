@@ -13,7 +13,7 @@ spring:
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:rootpassword}
   rabbitmq:
-    addresses:  ${RABBITMQ_ADDRESS:127.0.0.1}
+    addresses: ${RABBITMQ_ADDRESS:127.0.0.1}
     port: ${RABBITMQ_POST:15672}
     username: ${RABBITMQ_USERNAME:user}
     password: ${RABBITMQ_PASSWORD:password}
