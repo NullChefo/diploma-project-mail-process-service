@@ -4,7 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - dev
+      - main
+    #  - dev
 
 jobs:
   build:
