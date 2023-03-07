@@ -181,7 +181,7 @@
 						 -->
 					</from>
 					<to>
-						<image>docker.io/nullchefo/${artifactId}</image>
+						<image>ghcr.io/nullchefo/diploma-project-${project.artifactId}:${project.version}</image>
 					</to>
 					<container>
 						<mainClass>com.nullchefo.mailservice.MailProcessServiceApplication</mainClass>
