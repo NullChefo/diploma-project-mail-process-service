@@ -111,7 +111,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-commons</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -128,9 +128,8 @@
 			<groupId>com.github.loki4j</groupId>
 			<artifactId>loki-logback-appender</artifactId>
 			<version>1.4.0</version>
-			<scope>runtime</scope>
+	<!--	<scope>runtime</scope> -->
 		</dependency>
-
 	</dependencies>
 
 	<build>
