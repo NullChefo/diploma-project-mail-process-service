@@ -130,6 +130,15 @@
 			<version>1.4.0</version>
 	<!--	<scope>runtime</scope> -->
 		</dependency>
+
+
+		<!-- https://springdoc.org/v2/ -->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.0.4</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

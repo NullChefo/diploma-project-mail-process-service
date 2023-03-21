@@ -38,6 +38,13 @@ spring:
 
 
 management:
+  server:
+    # actuator port
+    port: 8184
+  #  server:
+  #    port: 8081
+  #    ssl:
+  #      enabled: false
   zipkin:
     tracing:
       endpoint: ${ZIPKIN_URL:"http://localhost:9411"}
