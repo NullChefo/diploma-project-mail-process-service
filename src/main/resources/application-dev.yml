@@ -64,3 +64,9 @@ mail:
     exchange: mail-send-exchange
   routing:
     key: mail-send-routing-key
+
+springdoc:
+  api-docs:
+    path: "/docs/api"
+  swagger-ui:
+    path: "/swagger-ui.html"
