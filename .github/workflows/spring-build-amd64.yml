@@ -3,7 +3,7 @@ name: Native-AMD64
 on:
   push:
     branches:
-      - main
+    #  - main
       - dev
 
 env:
