@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 //TODO fix server for development
-@OpenAPIDefinition(servers = { @Server(url = "https://backend.nulchefo.com/mail-process") },  info = @Info(title = "Mail Process Service APIs", version = "v0.0.1", description = "Mail Process Service API", contact = @Contact(url = "https://nullchefo.com", name = "Fred", email = "stefank.dev.acc@gmail.com")))
+@OpenAPIDefinition(servers = { @Server(url = "https://backend.nullchefo.com/mail-process") },  info = @Info(title = "Mail Process Service APIs", version = "v0.0.1", description = "Mail Process Service API", contact = @Contact(url = "https://nullchefo.com", name = "Fred", email = "stefank.dev.acc@gmail.com")))
 @SecurityScheme(
 		name = "security_auth",
 		type = SecuritySchemeType.OAUTH2,
