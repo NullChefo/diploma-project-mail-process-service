@@ -20,7 +20,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 		flows = @OAuthFlows(
 				authorizationCode = @OAuthFlow(
 						authorizationUrl = "https://auth.nullchefo.com/oauth2/authorize",
-						tokenUrl = "https://auth.nullchefo.com/oauth/token",
+						tokenUrl = "https://auth.nullchefo.com/oauth2/token",
 						scopes = {
 								@OAuthScope(name = "openid", description = "openid scope"),
 								@OAuthScope(name = "mail-process.read", description = "with this scope, the user can access every get request"),
