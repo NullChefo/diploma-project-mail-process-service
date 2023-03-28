@@ -18,8 +18,8 @@ public class SpringSecurityConfig {
 				.requestMatchers(
 						"/actuator/**",
 
-						"/mail-process/v1/api-docs/**",
-						"/mail-process/swagger-ui.html"
+						"/v1/api-docs/**",
+						"/swagger-ui.html"
 								).permitAll()
 				.anyRequest().authenticated();
 		http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);

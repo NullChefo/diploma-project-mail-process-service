@@ -102,6 +102,6 @@ mail:
 
 springdoc:
   api-docs:
-    path: /mail-process/v1/api-docs #these urls will used to load the swagger ui of this service by the api gateway
+    path: /v1/api-docs #these urls will used to load the swagger ui of this service by the api gateway
   swagger-ui:
-    path: /mail-process/swagger-ui.html
+    path: /swagger-ui.html
