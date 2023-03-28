@@ -15,10 +15,11 @@ public class SpringSecurityConfig {
 				//	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				//	.and()
 				.authorizeHttpRequests()
-				.requestMatchers("/actuator/**",
+				.requestMatchers(
+						"/actuator/**",
 
-								 "/mail-process/v1/api-docs/**",
-								 "/mail-process/swagger-ui.html"
+						"/mail-process/v1/api-docs/**",
+						"/mail-process/swagger-ui.html"
 								).permitAll()
 				.anyRequest().authenticated();
 		http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
