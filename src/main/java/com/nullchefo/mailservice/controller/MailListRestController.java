@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nullchefo.mailservice.DTO.UserDTO;
 import com.nullchefo.mailservice.service.MailListService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 @RestController
 @RequestMapping("/mail-list")
+@SecurityRequirement(name = "Bearer Authentication")
 public class MailListRestController {
 
 	/*
