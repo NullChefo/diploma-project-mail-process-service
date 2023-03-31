@@ -24,28 +24,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
 								@OAuthScope(name = "write", description = "Write Access")
 						})))
 
-
-
-@SecurityScheme(
-		name = "security_auth",
-		type = SecuritySchemeType.OAUTH2,
-		//		in = SecuritySchemeIn.HEADER,
-		//		bearerFormat = "jwt",
-		flows = @OAuthFlows(
-				authorizationCode = @OAuthFlow(
-						authorizationUrl = "https://auth.nullchefo.com/oauth2/authorize",
-						tokenUrl = "https://auth.nullchefo.com/oauth2/token",
-						scopes = {
-								@OAuthScope(name = "openid", description = "openid scope"),
-								@OAuthScope(name = "social_media.read", description = "with this scope, the user can access every get request"),
-								@OAuthScope(name = "social_media.write", description = "with this scope, the user can access every post, put and delete request")
-						}
-				)
-		)
-)
-
- */
-
 @SecurityScheme(
 		name = "security_auth",
 		type = SecuritySchemeType.OAUTH2,
@@ -64,6 +42,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 		)
 )
 
+ */
 @SecurityScheme(
 		name = "Bearer Authentication",
 		type = SecuritySchemeType.HTTP,
