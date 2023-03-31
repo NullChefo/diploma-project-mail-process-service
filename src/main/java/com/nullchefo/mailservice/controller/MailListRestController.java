@@ -41,7 +41,6 @@ public class MailListRestController {
 		return ResponseEntity.ok(mailListService.getAllUsers());
 	}
 
-
 	@GetMapping("/{userId}")
 	public ResponseEntity<MailList> getMailListInfoForUser(@PathVariable final Long userId) {
 		return mailListService.getMailListInfoForUser(userId);
