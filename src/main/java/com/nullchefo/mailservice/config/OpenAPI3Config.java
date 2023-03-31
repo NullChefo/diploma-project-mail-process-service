@@ -4,6 +4,9 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.security.OAuthFlow;
+import io.swagger.v3.oas.annotations.security.OAuthFlows;
+import io.swagger.v3.oas.annotations.security.OAuthScope;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 
@@ -42,6 +45,25 @@ import io.swagger.v3.oas.annotations.servers.Server;
 )
 
  */
+
+@SecurityScheme(
+		name = "security_auth",
+		type = SecuritySchemeType.OAUTH2,
+		//		in = SecuritySchemeIn.HEADER,
+		//		bearerFormat = "jwt",
+		flows = @OAuthFlows(
+				authorizationCode = @OAuthFlow(
+						authorizationUrl = "https://auth.nullchefo.com/oauth2/authorize",
+						tokenUrl = "https://auth.nullchefo.com/oauth2/token",
+						scopes = {
+								@OAuthScope(name = "openid", description = "openid scope"),
+								@OAuthScope(name = "mail_process.read", description = "with this scope, the user can access every get request"),
+								@OAuthScope(name = "mail_process.write", description = "with this scope, the user can access every post, put and delete request")
+						}
+				)
+		)
+)
+
 @SecurityScheme(
 		name = "Bearer Authentication",
 		type = SecuritySchemeType.HTTP,

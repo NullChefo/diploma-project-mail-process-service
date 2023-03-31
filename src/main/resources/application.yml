@@ -105,3 +105,6 @@ springdoc:
     path: /v1/api-docs #these urls will used to load the swagger ui of this service by the api gateway
   swagger-ui:
     path: /swagger-ui.html
+    oauth:
+      use-pkce-with-authorization-code-grant: true
+      client-id: swagger-client
