@@ -1,5 +1,7 @@
 package com.nullchefo.mailservice.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nullchefo.mailservice.DTO.UserDTO;
+import com.nullchefo.mailservice.entity.MailList;
 import com.nullchefo.mailservice.service.MailListService;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -33,9 +36,15 @@ public class MailListRestController {
 		this.mailListService = mailListService;
 	}
 
+	@GetMapping("/")
+	public ResponseEntity<List<MailList>> getMailListInfoForUsers() {
+		return ResponseEntity.ok(mailListService.getAllUsers());
+	}
+
+
 	@GetMapping("/{userId}")
-	public void getMailListInfoForUser(@PathVariable final String userId) {
-		return;
+	public ResponseEntity<MailList> getMailListInfoForUser(@PathVariable final Long userId) {
+		return mailListService.getMailListInfoForUser(userId);
 	}
 
 	@PostMapping

@@ -1,5 +1,7 @@
 package com.nullchefo.mailservice.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -100,5 +102,19 @@ public class MailListService {
 			return ResponseEntity.status(410).body("Not Found");
 		}
 		return ResponseEntity.ok().build();
+	}
+
+	public List<MailList> getAllUsers() {
+		return mailListRepository.findAll();
+	}
+
+	public ResponseEntity<MailList> getMailListInfoForUser(final Long userId) {
+
+		MailList mailList = mailListRepository.findByUserId(userId);
+		if (mailList == null) {
+			return ResponseEntity.status(404).body(null);
+		}
+		return ResponseEntity.ok(mailList);
+
 	}
 }
