@@ -13,8 +13,8 @@ public class SpringSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http    // TODO fix this
 				.csrf().disable()
-					.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-					.and()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
 				.authorizeHttpRequests()
 				.requestMatchers(
 						"/actuator/**",
