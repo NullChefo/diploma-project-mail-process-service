@@ -9,7 +9,6 @@ import jakarta.transaction.Transactional;
 
 @Repository
 public interface MailListRepository extends JpaRepository<MailList, Long> {
-	// All not standard methods need to be @Transaction
 	@Transactional
 	boolean deleteByUserId(Long userId);
 

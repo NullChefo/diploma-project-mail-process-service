@@ -20,7 +20,7 @@ public class MailConsumer {
 
 	@RabbitListener(queues = { "${rabbitmq.queue.name}" })
 	public void consumeJsonMessage(Mail mail) {
-		log.info(String.format("Received JSON message -> %s", mail.toString()));
+		log.trace(String.format("Received JSON message -> %s", mail.toString()));
 
 		mailService.processAndSend(mail);
 	}
