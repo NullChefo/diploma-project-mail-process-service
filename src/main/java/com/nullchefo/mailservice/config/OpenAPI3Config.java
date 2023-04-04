@@ -7,9 +7,8 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 
-//TODO fix server for development
 @OpenAPIDefinition(servers = {
-		@Server(url = "https://backend.nullchefo.com/mail-process") }, info = @Info(title = "Mail Process Service APIs", version = "v0.0.1", description = "Mail Process Service API", contact = @Contact(url = "https://nullchefo.com", name = "Stefan", email = "stefank.dev.acc@gmail.com")))
+		@Server(url = "https://backend.nullchefo.com/mail-process"), @Server(url = "http://localhost:8000/mail-process"), @Server(url = "http://localhost:8084") }, info = @Info(title = "Mail Process Service APIs", version = "v0.0.1", description = "Mail Process Service API", contact = @Contact(url = "https://nullchefo.com", name = "Stefan", email = "stefank.dev.acc@gmail.com")))
 /*
 @SecurityScheme(name = "OAuth2", type = SecuritySchemeType.OAUTH2,
 				flows = @OAuthFlows(authorizationCode = @OAuthFlow(

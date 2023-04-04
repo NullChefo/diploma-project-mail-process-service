@@ -3,7 +3,7 @@ server:
   shutdown: graceful
   error:
     include-message: always
-    include-exception: true # TODO make it false
+    include-exception: true
 
 spring:
   application:
@@ -11,6 +11,7 @@ spring:
   devtools:
     livereload:
       port: 35730
+#  output.ansi.enabled: ALWAYS
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/diploma-project
     username: postgres

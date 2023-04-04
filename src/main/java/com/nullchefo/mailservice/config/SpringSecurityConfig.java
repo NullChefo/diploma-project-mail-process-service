@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -12,12 +13,11 @@ public class SpringSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http    // TODO fix this
 				.csrf().disable()
-				//	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				//	.and()
+					.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+					.and()
 				.authorizeHttpRequests()
 				.requestMatchers(
 						"/actuator/**",
-
 						"/v1/api-docs/**",
 						"/swagger-ui.html"
 								).permitAll()
