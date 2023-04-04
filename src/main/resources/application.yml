@@ -84,7 +84,15 @@ flyway:
 
 logging:
   pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+## Only for debugging purposes
+#  level:
+#    root: INFO
+#    org.springframework.web: TRACE
+#    org.springframework.security: TRACE
+#    org.springframework.security.oauth2: TRACE
+#    org.springframework.cloud.gateway: TRACE
+#    org.springframework.security.jwt: TRACE
 
 
 rabbitmq:
