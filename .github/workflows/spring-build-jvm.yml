@@ -51,8 +51,10 @@ jobs:
           distribution: 'zulu'
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           cache: maven
+      - name: Run tests
+        run: mvn test
       - name: Build with Maven
-        run: mvn test compile jib:build
+        run: mvn compile jib:build
 #        env:
 #          # The hostname used to communicate with the PostgreSQL service container
 #          SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/diploma-project-test"
