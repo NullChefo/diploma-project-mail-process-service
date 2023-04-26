@@ -16,25 +16,25 @@ jobs:
     permissions:
       contents: read
       packages: write
-#    # Service containers to run with `container-job`
-#    services:
-#      # Label used to access the service container
-#      postgres:
-#        # Docker Hub image
-#        image: postgres
-#        # Provide the password for postgres
-#        env:
-#          POSTGRES_USER: postgres
-#          POSTGRES_PASSWORD: rootpassword
-#          POSTGRES_DB: diploma-project-test
-#        # Set health checks to wait until postgres has started
-#        options: >-
-#          --health-cmd pg_isready
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
-#        ports:
-#          - 5432:5432
+    #    # Service containers to run with `container-job`
+    #    services:
+    #      # Label used to access the service container
+    #      postgres:
+    #        # Docker Hub image
+    #        image: postgres
+    #        # Provide the password for postgres
+    #        env:
+    #          POSTGRES_USER: postgres
+    #          POSTGRES_PASSWORD: rootpassword
+    #          POSTGRES_DB: diploma-project-test
+    #        # Set health checks to wait until postgres has started
+    #        options: >-
+    #          --health-cmd pg_isready
+    #          --health-interval 10s
+    #          --health-timeout 5s
+    #          --health-retries 5
+    #        ports:
+    #          - 5432:5432
 
     steps:
       - name: Login to GitHub Container Registry
