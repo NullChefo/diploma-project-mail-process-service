@@ -270,7 +270,7 @@
 					</to>
 					<container>
 						<mainClass>com.nullchefo.mailservice.MailProcessServiceApplication</mainClass>
-						<user>nobody: nogroup</user>
+						<users>nobody: nogroup</users>
 						<jvmFlags>
 							<jvmFlag>--enable-preview</jvmFlag>
 						</jvmFlags>
