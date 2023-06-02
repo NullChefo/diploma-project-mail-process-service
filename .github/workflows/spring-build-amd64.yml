@@ -53,6 +53,8 @@ jobs:
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           cache: maven
 
+      - name: Get dependencies
+        run: mvn dependency:go-offline
         #  -Dmaven.test.skip=true 
       - name: Build with Maven
         run: mvn -Pnative -Dmaven.test.skip=true -e -X spring-boot:build-image
