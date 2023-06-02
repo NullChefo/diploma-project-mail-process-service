@@ -3,8 +3,8 @@ name: Native-AMD64
 on:
   push:
     branches:
-      #  - main
-      - dev
+      - main
+    #  - dev
 
 env:
   IMAGE_NAME: mail-process
@@ -17,24 +17,24 @@ jobs:
       contents: read
       packages: write
     # Service containers to run with `container-job`
-    services:
-      # Label used to access the service container
-      postgres:
-        # Docker Hub image
-        image: postgres
-        # Provide the password for postgres
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: rootpassword
-          POSTGRES_DB: diploma-project-test
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 5432:5432
+#     services:
+#       # Label used to access the service container
+#       postgres:
+#         # Docker Hub image
+#         image: postgres
+#         # Provide the password for postgres
+#         env:
+#           POSTGRES_USER: postgres
+#           POSTGRES_PASSWORD: rootpassword
+#           POSTGRES_DB: diploma-project-test
+#         # Set health checks to wait until postgres has started
+#         options: >-
+#           --health-cmd pg_isready
+#           --health-interval 10s
+#           --health-timeout 5s
+#           --health-retries 5
+#         ports:
+#           - 5432:5432
 
     steps:
       - name: Login to GitHub Container Registry
@@ -53,14 +53,19 @@ jobs:
           server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
           cache: maven
 
+        #  -Dmaven.test.skip=true 
       - name: Build with Maven
         run: mvn -Pnative -Dmaven.test.skip=true -e -X spring-boot:build-image
-        env:
-          # The hostname used to communicate with the PostgreSQL service container
-          SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/diploma-project-test"
-          SPRING_DATASOURCE_USERNAME: "postgres"
-          SPRING_DATASOURCE_PASSWORD: "rootpassword"
+#         env:
+#           # The hostname used to communicate with the PostgreSQL service container
+#           SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/diploma-project-test"
+#           SPRING_DATASOURCE_USERNAME: "postgres"
+#           SPRING_DATASOURCE_PASSWORD: "rootpassword"
+
+        
+      - name: Push Images to Docker Registry
+        run: docker tag ghcr.io/nullchefo/diploma-project-mail-process-service ghcr.io/nullchefo/diploma-project-mail-process-service-amd64
 
       #Deploy the image to the Docker registry
       - name: Push Images to Docker Registry
-        run: docker push -a ghcr.io/nullchefo/diploma-project-mail-process-service
+        run: docker push -a ghcr.io/nullchefo/diploma-project-mail-process-service ghcr.io/nullchefo/diploma-project-mail-process-service-amd64
