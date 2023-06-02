@@ -221,7 +221,7 @@
 
 					<imageName>ghcr.io/nullchefo/diploma-project-${project.artifactId}:${project.version}</imageName>
 					<image>
-						<builder>dashaun/builder:tiny</builder>
+						 <!--    <builder>dashaun/builder:tiny</builder> -->
 						<env>
 							<BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
 						</env>
